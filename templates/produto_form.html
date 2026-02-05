@@ -1,0 +1,34 @@
+{% extends 'base.html' %} <!-- Herda base -->
+
+{% block conteudo %} <!-- Conteúdo -->
+<h1>{{ titulo }}</h1> <!-- Título -->
+
+<div class="d-flex align-items-start gap-4"> <!-- Layout -->
+
+    {% if produto and produto.imagem %} <!-- Se tem imagem -->
+    <div class="flex-shrink-0"> <!-- Coluna -->
+        <img src="{{ url_for('static', filename=produto.imagem) }}" alt="Imagem do Produto" width="150"> <!-- Preview -->
+    </div> <!-- Fecha -->
+    {% endif %} <!-- Fecha -->
+
+    <form method="POST" enctype="multipart/form-data" class="flex-grow-1"> <!-- Form upload -->
+        <div class="mb-3"> <!-- Grupo -->
+            <label class="form-label">Nome</label> <!-- Label -->
+            <input type="text" name="name" value="{{ produto.name if produto else '' }}" class="form-control" required> <!-- Campo -->
+        </div> <!-- Fecha -->
+
+        <div class="mb-3"> <!-- Grupo -->
+            <label class="form-label">Preço</label> <!-- Label -->
+            <input type="number" step="0.01" name="price" value="{{ produto.price if produto else '' }}" class="form-control" required> <!-- Campo -->
+        </div> <!-- Fecha -->
+
+        <div class="mb-3"> <!-- Grupo -->
+            <label class="form-label">Imagem</label> <!-- Label -->
+            <input type="file" name="imagem" class="form-control"> <!-- Upload -->
+        </div> <!-- Fecha -->
+
+        <button type="submit" class="btn btn-primary">Salvar</button> <!-- Salvar -->
+        <a class="btn btn-secondary" href="{{ url_for('produtos.listar_produtos') }}">Voltar</a> <!-- Voltar -->
+    </form> <!-- Fecha -->
+</div> <!-- Fecha -->
+{% endblock %} <!-- Fecha -->

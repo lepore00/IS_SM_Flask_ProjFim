@@ -1,0 +1,13 @@
+{% extends 'base.html' %} <!-- Herança -->
+
+{% block conteudo %} <!-- Conteúdo -->
+<div class="container mt-5"> <!-- Container -->
+    <div class="jumbotron text-center"> <!-- Destaque -->
+        <h1 class="display-4">{{ titulo }}</h1> <!-- Título -->
+        <p class="lead">Bem-vindo ao Gestor de Produtos! Aqui você pode criar, editar, visualizar e deletar produtos.</p> <!-- Texto -->
+        <hr class="my-4"> <!-- Linha -->
+        <a class="btn btn-primary btn-lg" href="{{ url_for('produtos.listar_produtos') }}" role="button">Ver Produtos</a> <!-- Botão -->
+        <a class="btn btn-success btn-lg" href="{{ url_for('produtos.cadastrar_produto') }}" role="button">Criar Produto</a> <!-- Botão -->
+    </div> <!-- Fecha -->
+</div> <!-- Fecha -->
+{% endblock %} <!-- Fecha bloco -->

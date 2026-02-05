@@ -1,0 +1,59 @@
+<!DOCTYPE html> <!-- Declara HTML5 -->
+<html lang="pt-BR"> <!-- Define idioma -->
+<head> <!-- Cabeçalho -->
+    <meta charset="UTF-8"> <!-- Charset -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsivo -->
+    <title>{{ titulo }}</title> <!-- Título vindo do Flask -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap 5.3.3 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- CSS local -->
+</head> <!-- Fecha head -->
+<body> <!-- Início body -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4"> <!-- Navbar azul -->
+    <div class="container"> <!-- Container -->
+        <a class="navbar-brand" href="{{ url_for('home') }}">Gestor Produtos</a> <!-- Link para home -->
+
+        <div class="d-flex gap-2"> <!-- Área de botões -->
+
+            {% if current_user.is_authenticated %} <!-- Se o usuário estiver logado -->
+
+                <a class="btn btn-light" href="{{ url_for('produtos.listar_produtos') }}">Produtos</a> <!-- Link produtos -->
+
+                <a class="btn btn-light" href="{{ url_for('produtos.cadastrar_produto') }}">Criar Produto</a> <!-- Link criar produto -->
+
+                {% if current_user.is_admin %} <!-- Se for admin -->
+                    <a class="btn btn-warning" href="{{ url_for('users.listar') }}">Usuários</a> <!-- Link usuários (admin-only) -->
+                {% endif %} <!-- Fecha if admin -->
+
+                <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Sair</a> <!-- Link logout -->
+
+            {% else %} <!-- Se NÃO estiver logado -->
+
+                <a class="btn btn-light" href="{{ url_for('auth.login') }}">Entrar</a> <!-- Link login -->
+
+            {% endif %} <!-- Fecha if autenticado -->
+
+        </div> <!-- Fecha área de botões -->
+    </div> <!-- Fecha container -->
+</nav> <!-- Fecha navbar -->
+
+<div class="container"> <!-- Container do conteúdo -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %} <!-- Lê flashes com categorias -->
+        {% if messages %} <!-- Se tem mensagens -->
+            {% for cat, msg in messages %} <!-- Loop -->
+                <div class="alert alert-{{ cat }}">{{ msg }}</div> <!-- Exibe alerta -->
+            {% endfor %} <!-- Fim loop -->
+        {% endif %} <!-- Fim if -->
+    {% endwith %} <!-- Fim with -->
+
+    {% block conteudo %}{% endblock %} <!-- Bloco para páginas filhas -->
+</div> <!-- Fecha container -->
+
+<footer class="text-center mt-4 mb-2"> <!-- Rodapé -->
+    &copy; 2025 Gestor de Produtos <!-- Texto -->
+</footer> <!-- Fecha rodapé -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- JS do Bootstrap -->
+</body> <!-- Fecha body -->
+</html> <!-- Fecha html -->

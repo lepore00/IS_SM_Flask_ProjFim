@@ -1,0 +1,25 @@
+{% extends 'base.html' %} <!-- Herda base -->
+
+{% block conteudo %} <!-- Conteúdo -->
+<h1 class="mb-4">{{ titulo }}</h1> <!-- Título -->
+
+<form method="POST" class="mt-3"> <!-- Form -->
+  <div class="mb-3"> <!-- Grupo -->
+    <label class="form-label">Usuário</label> <!-- Label -->
+    <input type="text" name="username" class="form-control" value="{{ usuario.username if usuario else '' }}" required> <!-- Input -->
+  </div> <!-- Fecha -->
+
+  <div class="mb-3"> <!-- Grupo -->
+    <label class="form-label">Senha {% if usuario %}(deixe vazio para não alterar){% endif %}</label> <!-- Label -->
+    <input type="password" name="password" class="form-control" {% if not usuario %}required{% endif %}> <!-- Input -->
+  </div> <!-- Fecha -->
+
+  <div class="form-check mb-3"> <!-- Checkbox -->
+    <input class="form-check-input" type="checkbox" name="is_admin" id="is_admin" {% if usuario and usuario.is_admin %}checked{% endif %}> <!-- Campo -->
+    <label class="form-check-label" for="is_admin">Administrador</label> <!-- Label -->
+  </div> <!-- Fecha -->
+
+  <button class="btn btn-primary" type="submit">Salvar</button> <!-- Salvar -->
+  <a href="{{ url_for('users.listar') }}" class="btn btn-secondary">Voltar</a> <!-- Voltar -->
+</form> <!-- Fecha -->
+{% endblock %} <!-- Fecha -->

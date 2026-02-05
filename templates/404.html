@@ -1,0 +1,7 @@
+{% extends 'base.html' %} <!-- Herda base -->
+
+{% block conteudo %} <!-- Conteúdo -->
+<h1>404 - Produto Não Encontrado</h1> <!-- Título -->
+<p>O recurso que você tentou acessar não existe.</p> <!-- Texto -->
+<a class="btn btn-primary" href="{{ url_for('produtos.listar_produtos') }}">Voltar para Produtos</a> <!-- Voltar -->
+{% endblock %} <!-- Fecha -->

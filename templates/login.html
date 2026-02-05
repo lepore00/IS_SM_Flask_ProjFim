@@ -1,0 +1,21 @@
+{% extends 'base.html' %} <!-- Herda layout -->
+
+{% block conteudo %} <!-- Conteúdo -->
+<h1 class="mb-4">Login</h1> <!-- Título -->
+
+<form method="POST" class="card p-4"> <!-- Form -->
+  <div class="mb-3"> <!-- Grupo -->
+    <label class="form-label">Usuário</label> <!-- Label -->
+    <input name="username" class="form-control" required> <!-- Input -->
+  </div> <!-- Fecha grupo -->
+
+  <div class="mb-3"> <!-- Grupo -->
+    <label class="form-label">Senha</label> <!-- Label -->
+    <input type="password" name="password" class="form-control" required> <!-- Input -->
+  </div> <!-- Fecha grupo -->
+
+  <button class="btn btn-primary">Entrar</button> <!-- Botão -->
+</form> <!-- Fecha -->
+
+<p class="text-muted mt-3">Primeiro acesso: usuário <b>admin</b> e senha <b>admin</b></p> <!-- Dica -->
+{% endblock %} <!-- Fecha -->

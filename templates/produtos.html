@@ -1,0 +1,51 @@
+{% extends 'base.html' %} <!-- Herda base -->
+
+{% block conteudo %} <!-- Conteúdo -->
+<h1 class="mb-4">{{ titulo }}</h1> <!-- Título -->
+
+<div class="d-flex justify-content-between mb-3"> <!-- Barra -->
+    <a href="{{ url_for('produtos.cadastrar_produto') }}" class="btn btn-success">Criar Produto</a> <!-- Criar -->
+
+    <form class="d-flex" method="GET" action="{{ url_for('produtos.pesquisar_produto') }}"> <!-- Busca -->
+        <input class="form-control me-2" type="text" name="q" placeholder="Pesquisar produto..." value="{{ request.args.get('q', '') }}"> <!-- Input -->
+        <button class="btn btn-primary" type="submit">Pesquisar</button> <!-- Botão -->
+    </form> <!-- Fecha -->
+</div> <!-- Fecha -->
+
+<table class="table table-striped"> <!-- Tabela -->
+    <thead class="table-dark"> <!-- Cabeçalho -->
+        <tr> <!-- Linha -->
+            <th>ID</th> <!-- ID -->
+            <th>Imagem</th> <!-- Imagem -->
+            <th>Nome</th> <!-- Nome -->
+            <th>Preço (R$)</th> <!-- Preço -->
+            <th>Ações</th> <!-- Ações -->
+        </tr> <!-- Fecha -->
+    </thead> <!-- Fecha -->
+    <tbody> <!-- Corpo -->
+    {% for produto in produtos %} <!-- Loop -->
+        <tr> <!-- Linha -->
+            <td>{{ produto.id }}</td> <!-- ID -->
+            <td> <!-- Imagem -->
+                {% if produto.imagem %} <!-- Se tem -->
+                    <img src="{{ url_for('static', filename=produto.imagem) }}" alt="Imagem do Produto" width="50"> <!-- Mostra -->
+                {% else %} <!-- Se não -->
+                    - <!-- Sem imagem -->
+                {% endif %} <!-- Fecha -->
+            </td> <!-- Fecha -->
+            <td>{{ produto.name }}</td> <!-- Nome -->
+            <td>R$ {{ produto.price | round(2) }}</td> <!-- Preço -->
+            <td> <!-- Ações -->
+                <a href="{{ url_for('produtos.editar_produto', id=produto.id) }}" class="btn btn-warning btn-sm">Editar</a> <!-- Editar -->
+                <a href="{{ url_for('produtos.deletar_produto', id=produto.id) }}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Tem certeza que deseja deletar este produto?');">Deletar</a> <!-- Deletar -->
+            </td> <!-- Fecha -->
+        </tr> <!-- Fecha -->
+    {% else %} <!-- Sem itens -->
+        <tr> <!-- Linha -->
+            <td colspan="5" class="text-center">Nenhum produto encontrado.</td> <!-- Mensagem -->
+        </tr> <!-- Fecha -->
+    {% endfor %} <!-- Fecha loop -->
+    </tbody> <!-- Fecha -->
+</table> <!-- Fecha -->
+{% endblock %} <!-- Fecha -->

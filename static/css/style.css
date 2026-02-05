@@ -1,0 +1,9 @@
+.card-img-top { /* Imagem no topo do card */
+    width: 100%; /* Ocupa largura total */
+    height: 200px; /* Altura fixa */
+    object-fit: cover; /* Corta sem distorcer */
+} /* Fim regra */
+
+.card { /* Card */
+    height: 100%; /* Altura total no container */
+} /* Fim regra */
